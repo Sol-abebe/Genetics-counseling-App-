@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Genetics counseling App </title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Clinical Genetics & Maternal-Fetal Hematology Modeler</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-light: #eff6ff;
+            --secondary-color: #0d9488;
+            --text-dark: #1f2937;
+            --text-light: #4b5563;
+            --bg-main: #f8fafc;
+            --border-color: #cbd5e1;
+            --accent-alert: #b91c1c;
+            --accent-bg-alert: #fef2f2;
+            --accent-warn: #d97706;
+            --accent-bg-warn: #fffbeb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: #93c5fd;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 24px;
+        }
+
+        @media (min-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0f766e;
+        }
+
+        .results-box {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary-color);
+            padding: 16px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 15px;
+        }
+
+        .risk-display {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .alert-box {
+            background-color: var(--accent-bg-alert);
+            border: 1px solid #fca5a5;
+            border-left: 4px solid var(--accent-alert);
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #7f1d1d;
+        }
+
+        .warn-box {
+            background-color: var(--accent-bg-warn);
+            border: 1px solid #fde68a;
+            border-left: 4px solid var(--accent-warn);
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #78350f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-mendel { background-color: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+        .badge-poly { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+        .badge-chrom { background-color: #fef8e6; color: #9a3412; border: 1px solid #fed7aa; }
+        .badge-heme { background-color: #f5f3ff; color: #5b21b6; border: 1px solid #ddd6fe; }
+
+        .tab-container { margin-bottom: 15px; }
+        .tab-buttons { display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); margin-bottom: 15px; overflow-x: auto; }
+        .tab-btn { background: none; border: none; padding: 10px 12px; font-size: 0.9rem; cursor: pointer; color: var(--text-light); white-space: nowrap; border-bottom: 2px solid transparent; }
+        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); font-weight: 600; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        ul.bullet-list { margin-left: 20px; margin-top: 8px; }
+        ul.bullet-list li { margin-bottom: 6px; font-size: 0.9rem; color: var(--text-light); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Universal Genetics & Maternal-Fetal Hematology Modeler</h1>
+        <p>Clinical Decision Support Tool for Cytogenetics, Non-Syndromic Isolated CHDs, and Red Cell Alloimmunization<br> <strong> By Dr Solomon MD, MPH/RH </strong>June 2026</p>
+    </header>
+
+    <div class="grid-layout">
+        
+        <div class="card">
+            <h2>📊 Clinical Parameter Entry</h2>
+            <form id="clinicalForm">
+                <div class="form-group">
+                    <label for="coreCategory">Core Medical Panel</label>
+                    <select id="coreCategory" onchange="handleCategorySwitch()">
+                        <option value="down-syndrome">Down Syndrome (Trisomy 21 Clinical Subtypes)</option>
+                        <option value="isolated-chd">Isolated Congenital Heart Diseases (Multifactorial)</option>
+                        <option value="other-congenital">Other Isolated Congenital Anomalies</option>
+                        <option value="maternal-hematology">Maternal-Fetal Blood Group Incompatibilities</option>
+                    </select>
+                </div>
+
+                <div id="downPanel">
+                    <div class="form-group">
+                        <label for="downType">Cytogenetic Subtype</label>
+                        <select id="downType" onchange="handleCategorySwitch()">
+                            <option value="nondisjunction">Free Trisomy 21 (Meiotic Non-disjunction)</option>
+                            <option value="mosaic">Mosaic Down Syndrome (Post-zygotic Error)</option>
+                            <option value="translocation-denovo">Robertsonian Translocation (De Novo Rearrangement)</option>
+                            <option value="translocation-mat">Robertsonian Translocation (Maternal Carrier Parent)</option>
+                            <option value="translocation-pat">Robertsonian Translocation (Paternal Carrier Parent)</option>
+                            <option value="translocation-homologous">Homologous t(21q21q) Carrier Parent</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="ageGroup">
+                        <label for="maternalAge">Maternal Age at Subsequent Conception</label>
+                        <select id="maternalAge">
+                            <option value="age-20">Age 20</option>
+                            <option value="age-25">Age 25</option>
+                            <option value="age-30">Age 30</option>
+                            <option value="age-35">Age 35</option>
+                            <option value="age-40">Age 40</option>
+                            <option value="age-45">Age 45</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="isolatedChdPanel" style="display: none;">
+                    <div class="form-group">
+                        <label for="chdKinship">Kinship Proband Vector</label>
+                        <select id="chdKinship">
+                            <option value="one-sibling">1 Prior Sibling Affected (Parents Normal)</option>
+                            <option value="two-siblings">2 Prior Siblings Affected (Parents Normal)</option>
+                            <option value="affected-father">Affected Father</option>
+                            <option value="affected-mother">Affected Mother</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="chdType">Anatomical Phenotype</label>
+                        <select id="chdType">
+                            <option value="vsd">Ventricular Septal Defect (VSD)</option>
+                            <option value="asd">Atrial Septal Defect (ASD)</option>
+                            <option value="pda">Patent Ductus Arteriosus (PDA)</option>
+                            <option value="tof">Tetralogy of Fallot (TOF)</option>
+                            <option value="hlhs">Hypoplastic Left Heart Syndrome (HLHS)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="otherCongenitalPanel" style="display: none;">
+                    <div class="form-group">
+                        <label for="otherKinship">Pedigree Status</label>
+                        <select id="otherKinship">
+                            <option value="one-child">1 Prior Child Affected</option>
+                            <option value="two-children">2 Prior Children Affected</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherType">Isolated Structural Defect</label>
+                        <select id="otherType">
+                            <option value="cleft-lip">Isolated Cleft Lip ± Cleft Palate</option>
+                            <option value="ntd">Neural Tube Defect (Spina Bifida / Anencephaly)</option>
+                            <option value="pyloric-female">Congenital Pyloric Stenosis (Female Index Case)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="hematologyPanel" style="display: none;">
+                    <div class="form-group">
+                        <label for="hemeIncompatibility">Incompatibility/Alloimmunization Vector</label>
+                        <select id="hemeIncompatibility" onchange="handleHemeSubSwitch()">
+                            <option value="rh-iso">Rh Isoimmunization (Maternal Rh-, Paternal Rh+)</option>
+                            <option value="abo-incompat">ABO Incompatibility (Maternal O, Neonatal A or B)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="rhTiterGroup">
+                        <label for="rhTiterState">Current Maternal Anti-D Indirect Coombs Titer</label>
+                        <select id="rhTiterState">
+                            <option value="negative">Unsensitized (Titer = 0 / Coomb's Negative)</option>
+                            <option value="low-titer">Sensitized: Low Titer (Sub-critical &lt; 1:16)</option>
+                            <option value="critical-titer">Sensitized: Critical Titer (&ge; 1:16 or 1:8 dynamic limits)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="executeUniversalEngine()">Run Diagnostics & Risk Assessment</button>
+            </form>
+
+            <div class="results-box">
+                <p>Calculated Clinical Risk / Evaluation Profile:</p>
+                <div class="risk-display" id="riskValue">0.7% - 1.0%</div>
+                <p id="riskInterpretation" style="font-size: 0.95rem; color: var(--text-light);">
+                    Recurrence parameters for free Trisomy 21 are bounded by a 1% threshold or age risk limits.
+                </p>
+                <div id="alertBox" class="alert-box" style="display: none;"></div>
+                <div id="warnBox" class="warn-box" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Action Protocols & Preventative Tracks</h2>
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab(event, 'surveillanceTab')">Surveillance & Follow-Up</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'criteriaTab')">Diagnostic Criteria</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'mechanismTab')">Pathophysiology & Prevention</button>
+                </div>
+                
+                <div id="surveillanceTab" class="tab-content active">
+                    <ul class="bullet-list" id="surveillanceList">
+                        <li><strong>First-Trimester Screening (10-14 Weeks):</strong> Serum PAPP-A, free β-hCG, and nuchal translucency ultrasound markers.</li>
+                        <li><strong>Cell-Free DNA (cfDNA/NIPT):</strong> High sensitivity tracking (>99% for T21) accessible from gestation week 10 onwards.</li>
+                    </ul>
+                </div>
+
+                <div id="criteriaTab" class="tab-content">
+                    <ul class="bullet-list" id="criteriaList">
+                        <li><strong>Ultrasound Soft Indicators:</strong> Increased nuchal fold thickness, absent nasal bone, or complex endocardial cushion defects.</li>
+                    </ul>
+                </div>
+
+                <div id="mechanismTab" class="tab-content">
+                    <ul class="bullet-list" id="mechanismList">
+                        <li><strong>Primary Driver:</strong> Chromosomal non-disjunction caused by spindle degradation errors, heavily correlated with advanced maternal age.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card full-width">
+            <h2>📖 Clinical Databank: Genetics & Fetal Isoimmunization Matrix</h2>
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab(event, 'tableDown')">Down Syndrome Categories</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'tableChd')">Isolated Cardiorespiratory Phenotypes</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'tableHeme')">Immunohematology Profiles</button>
+                </div>
+
+                <div id="tableDown" class="tab-content active" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cytogenetic Variant</th>
+                                <th>Age 20-30 Risk Profile</th>
+                                <th>Age 35 Risk Profile</th>
+                                <th>Age 40-45 Risk Profile</th>
+                                <th>Counseling Paradigm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Free Trisomy 21</strong></td>
+                                <td>0.7% - 1.0%</td>
+                                <td>~1.0%</td>
+                                <td>1.0% - 3.3% (Age Baseline)</td>
+                                <td>Meiotic non-disjunction link; sporadiac risk acceleration.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Maternal t(14;21) Carrier</strong></td>
+                                <td>10.0% - 15.0%</td>
+                                <td>10.0% - 15.0%</td>
+                                <td>10.0% - 15.0%</td>
+                                <td>High-risk mechanical translocation pipeline.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="tableChd" class="tab-content" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Lesion Type</th>
+                                <th>General Baseline</th>
+                                <th>1 Affected Sibling</th>
+                                <th>Affected Mother</th>
+                                <th>Clinical Recommendation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ventricular Septal Defect</strong></td>
+                                <td>0.3%</td>
+                                <td>3.0%</td>
+                                <td>6.0% - 10.0%</td>
+                                <td>Targeted fetal anatomy sweep at 18-22 weeks.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hypoplastic Left Heart</strong></td>
+                                <td>0.02%</td>
+                                <td>4.0% - 6.0%</td>
+                                <td>12.0% - 15.0%</td>
+                                <td>High heritability; perform cross-sectional echocardiography.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="tableHeme" class="tab-content" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Condition</th>
+                                <th>Occurrence Window</th>
+                                <th>Anemia / Hydrops Risk</th>
+                                <th>Primary Prophylaxis Strategy</th>
+                                <th>Neonatal Postpartum Treatment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Rh Isoimmunization</strong></td>
+                                <td>Subsequent pregnancies (spares first unless early sensitization)</td>
+                                <td>Severe risk; can cause hydrops fetalis</td>
+                                <td>Rho(D) Immune Globulin (RhoGAM) at 28 weeks & postpartum</td>
+                                <td>Phototherapy, Exchange Transfusion, IVIG</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ABO Incompatibility</strong></td>
+                                <td>Can manifest in **first pregnancy** (~40-50%)</td>
+                                <td>Mild to negligible; rarely limits fetal erythropoiesis</td>
+                                <td>None required prenatally (A/B antigens shield tissues)</td>
+                                <td>Phototherapy for hyperbilirubinemia, hydration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function handleCategorySwitch() {
+        const category = document.getElementById('coreCategory').value;
+        document.getElementById('downPanel').style.display = (category === 'down-syndrome') ? 'block' : 'none';
+        document.getElementById('isolatedChdPanel').style.display = (category === 'isolated-chd') ? 'block' : 'none';
+        document.getElementById('otherCongenitalPanel').style.display = (category === 'other-congenital') ? 'block' : 'none';
+        document.getElementById('hematologyPanel').style.display = (category === 'maternal-hematology') ? 'block' : 'none';
+
+        if (category === 'down-syndrome') {
+            const downType = document.getElementById('downType').value;
+            document.getElementById('ageGroup').style.display = (downType === 'nondisjunction' || downType === 'mosaic') ? 'block' : 'none';
+        }
+    }
+
+    function handleHemeSubSwitch() {
+        const hemeIncompat = document.getElementById('hemeIncompatibility').value;
+        document.getElementById('rhTiterGroup').style.display = (hemeIncompat === 'rh-iso') ? 'block' : 'none';
+    }
+
+    function executeUniversalEngine() {
+        const category = document.getElementById('coreCategory').value;
+        const riskDisplay = document.getElementById('riskValue');
+        const interpretation = document.getElementById('riskInterpretation');
+        const alertBox = document.getElementById('alertBox');
+        const warnBox = document.getElementById('warnBox');
+        
+        const surveillance = document.getElementById('surveillanceList');
+        const criteria = document.getElementById('criteriaList');
+        const mechanism = document.getElementById('mechanismList');
+
+        alertBox.style.display = 'none';
+        warnBox.style.display = 'none';
+
+        // ================= PATHWAY A: DOWN SYNDROME =================
+        if (category === 'down-syndrome') {
+            const downType = document.getElementById('downType').value;
+            const age = document.getElementById('maternalAge').value;
+
+            criteria.innerHTML = `
+                <li><strong>Prenatal Markers:</strong> Check nuchal translucency (NT), nasal bone configuration, and femur/humerus length ratios.</li>
+                <li><strong>Postnatal Physical Signposts:</strong> Evaluation for central hypotonia, flat facial profile, upslanting palpebral fissures, and a single transverse palmar crease.</li>
+            `;
+
+            if (downType === 'nondisjunction') {
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Chromosomal aneuploidy (+21) caused by maternal meiotic non-disjunction spindle failure.</li>";
+                surveillance.innerHTML = `
+                    <li><strong>Cell-Free DNA (cfDNA / NIPT):</strong> Indicated from 10 weeks gestation (>99% accuracy).</li>
+                    <li><strong>Anatomical Evaluation:</strong> Formal structural assessment via target morphology screening at 18-22 weeks.</li>
+                `;
+                if (age === 'age-20' || age === 'age-25') { riskDisplay.innerText = "0.7% - 1.0%"; interpretation.innerText = "Elevated risk over early background markers; age-related excess risk controls this segment."; }
+                else if (age === 'age-30' || age === 'age-35') { riskDisplay.innerText = "~1.0%"; interpretation.innerText = "Empirical risk sits at a flat 1.0% limit."; }
+                else if (age === 'age-40') { riskDisplay.innerText = "1.0%"; interpretation.innerText = "Risk matches the baseline maternal age marker."; }
+                else if (age === 'age-45') { riskDisplay.innerText = "3.3%"; interpretation.innerText = "High-risk threshold entirely dictated by baseline maternal oocyte aging curves."; }
+            } 
+            else if (downType === 'translocation-mat') {
+                riskDisplay.innerText = "10.0% - 15.0%";
+                interpretation.innerText = "High recurrence risk driven by structural translocation mechanics in maternal germ lines.";
+                alertBox.style.display = 'block';
+                alertBox.innerHTML = "⚠️ <strong>Action Plan:</strong> Recommend invasive prenatal diagnostics (CVS or amniocentesis) with chromosomal microarrays.";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Balanced maternal carrier translocation results in high rates of unbalanced gamete generation.</li>";
+            }
+            else if (downType === 'translocation-homologous') {
+                riskDisplay.innerText = "100% Risk";
+                interpretation.innerText = "Absolute structural block. Viable conceptions will carry unbalanced Trisomy 21 profiles.";
+                alertBox.style.display = 'block';
+                alertBox.innerHTML = "🚨 <strong>Counseling Directive:</strong> Natural pregnancies will lead to either a Down syndrome phenotype or early spontaneous miscarriage. Discuss alternative reproductive paths.";
+            }
+            else {
+                riskDisplay.innerText = "< 1.0%";
+                interpretation.innerText = "Low sporadic tracking category (mosaic or verified de novo mechanisms).";
+            }
+        }
+
+        // ================= PATHWAY B: ISOLATED CHDs =================
+        else if (category === 'isolated-chd') {
+            const kinship = document.getElementById('chdKinship').value;
+            const chdType = document.getElementById('chdType').value;
+
+            criteria.innerHTML = "<li><strong>Target Review:</strong> Structural wall continuity, spatial alignment of the great arteries, and Doppler flow gradients across cardiac valves.</li>";
+            mechanism.innerHTML = "<li><strong>Model:</strong> Non-syndromic isolated lesions follow a polygenic multifactorial threshold inheritance model.</li>";
+            surveillance.innerHTML = "<li><strong>Target Scan:</strong> Advanced fetal echocardiography sweep between weeks 18-22 to verify anatomical configuration.</li>";
+
+            if (chdType === 'vsd') {
+                riskDisplay.innerText = (kinship === 'one-sibling') ? "3.0%" : (kinship === 'two-siblings') ? "10.0%" : "6.0% - 10.0%";
+                interpretation.innerText = "Isolated VSD parameters; exhibits predictable concordance metrics among first-degree relatives.";
+            } else if (chdType === 'hlhs') {
+                riskDisplay.innerText = (kinship === 'one-sibling') ? "4.0% - 6.0%" : "12.0% - 15.0%";
+                interpretation.innerText = "Left-sided lesions have high heritability indices compared to simple septal defects.";
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = "🔍 <strong>Screening Target:</strong> Evaluate parents via echocardiography to screen for subclinical, asymptomatic **Bicuspid Aortic Valves (BAV)**.";
+            } else {
+                riskDisplay.innerText = "1.5% - 3.0%";
+                interpretation.innerText = "Standard multifactorial recurrence ranges for isolated structural heart variants.";
+            }
+        }
+
+        // ================= PATHWAY C: OTHER ANOMALIES =================
+        else if (category === 'other-congenital') {
+            const otherType = document.getElementById('otherType').value;
+            if (otherType === 'ntd') {
+                riskDisplay.innerText = "2.0% - 3.0%";
+                interpretation.innerText = "Isolated Neural Tube Defect. Multifactorial tracking mechanics.";
+                alertBox.style.display = 'block';
+                alertBox.innerHTML = "💊 <strong>Prophylaxis:</strong> Prescribe high-dose periconceptional **Folic Acid (4.0 mg/day)** starting 1-3 months before subsequent conception.";
+                criteria.innerHTML = "<li><strong>Anatomical Markers:</strong> Check spinal column symmetry and monitor maternal serum alpha-fetoprotein (MSAFP).</li>";
+            } else if (otherType === 'pyloric-female') {
+                riskDisplay.innerText = "8.0%";
+                interpretation.innerText = "Carter Effect Active: Female index case indicates higher underlying familial polygenic load.";
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = "⚠️ Sibling recurrence risks are elevated because the index case belongs to the less frequently affected sex.";
+            } else {
+                riskDisplay.innerText = "2.0% - 4.0%";
+                interpretation.innerText = "Standard multifactorial structural birth defect recurrence limits.";
+            }
+        }
+
+        // ================= PATHWAY D: MATERNAL-FETAL HEMATOLOGY =================
+        else if (category === 'maternal-hematology') {
+            const hemeIncompat = document.getElementById('hemeIncompatibility').value;
+
+            if (hemeIncompat === 'rh-iso') {
+                const titerState = document.getElementById('rhTiterState').value;
+
+                criteria.innerHTML = `
+                    <li><strong>Maternal Direct Marker:</strong> Serum Indirect Coombs Test (ICT) to screen for circulating anti-D IgG antibodies.</li>
+                    <li><strong>Fetal Surveillance Gold Standard:</strong> Serial Doppler measurement of **Middle Cerebral Artery Peak Systolic Velocity (MCA-PSV)** after 20 weeks.</li>
+                    <li><strong>Severe Pathology Indicators:</strong> Ultrasound signs of hydrops fetalis (pericardial effusion, ascites, scalp edema, polyhydramnios).</li>
+                `;
+
+                if (titerState === 'negative') {
+                    riskDisplay.innerText = "Unsensitized (At Risk)";
+                    interpretation.innerText = "Maternal Rh-negative status with no active circulating anti-D antibodies. The current pregnancy is safe from active hemolysis, but requires strict prophylaxis to prevent future sensitization.";
+                    
+                    mechanism.innerHTML = `
+                        <li><strong>Pathophysiology:</strong> Fetal RBCs carrying the paternal D-antigen cross the placenta, provoking a maternal primary IgM response followed by IgG memory lines.</li>
+                        <li><strong>Prevention Protocol (RhoGAM Timeline):</strong> 
+                            <br>1. Administer **300 mcg Rho(D) Immune Globulin** intramuscularly at **28 weeks gestation**.
+                            <br>2. Re-administer within **72 hours postpartum** if neonatal blood typing confirms an Rh-positive status.
+                            <br>3. Provide coverage during any sensitizing event (e.g., amniocentesis, CVS, trauma, or spontaneous miscarriage).
+                        </li>
+                    `;
+                    surveillance.innerHTML = `
+                        <li><strong>Routine Care:</strong> Repeat Indirect Coombs antibody screening at 28 weeks gestation prior to RhoGAM injection.</li>
+                    `;
+                } 
+                else if (titerState === 'low-titer') {
+                    riskDisplay.innerText = "Sensitized: Low Risk";
+                    interpretation.innerText = "Circulating antibodies are present but below the critical threshold (typically < 1:16). Active severe fetal tissue hemolysis is unlikely at this level.";
+                    
+                    alertBox.style.display = 'block';
+                    alertBox.innerHTML = "🚫 <strong>Contraindication:</strong> RhoGAM is completely **ineffective and obsolete** once active maternal sensitization has occurred.";
+                    mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Active maternal IgG antibodies are present and capable of crossing the placenta, but current low density limits severe red cell destruction.</li>";
+                    surveillance.innerHTML = `
+                        <li><strong>Follow-Up:</strong> Monitor maternal antibody titers via Indirect Coombs testing every **4 weeks** until 28 weeks gestation, and then every **2 weeks** thereafter.</li>
+                    `;
+                } 
+                else if (titerState === 'critical-titer') {
+                    riskDisplay.innerText = "Sensitized: CRITICAL RISK";
+                    interpretation.innerText = "Maternal anti-D titer is at or above the critical threshold (&ge; 1:16). Risk of severe hemolytic disease of the fetus and newborn (HDFN), fetal anemia, and hydrops fetalis.";
+                    
+                    alertBox.style.display = 'block';
+                    alertBox.innerHTML = "🚨 <strong>High-Risk Protocol Activated:</strong> Mandates immediate referral to a Maternal-Fetal Medicine (MFM) specialist for close surveillance.";
+                    
+                    mechanism.innerHTML = `
+                        <li><strong>Pathophysiology:</strong> High antibody titers lead to rapid transplacental passage of anti-D IgG, causing severe splenic macrophage-mediated destruction of fetal Rh+ erythrocytes.</li>
+                    `;
+                    surveillance.innerHTML = `
+                        <li><strong>Follow-Up Engine:</strong> Discontinue serum titer checks. Initiate **serial MCA-PSV Doppler studies every 1 to 2 weeks** starting at 20 weeks gestation.</li>
+                        <li><strong>Intervention Threshold:</strong> If MCA-PSV rises above **1.5 MoM (Multiples of the Median)**, severe fetal anemia is diagnosed.</li>
+                        <li><strong>Active Treatment Plan:</strong> Cordocentesis (percutaneous umbilical blood sampling) to confirm hematocrit levels, followed by **Intrauterine Blood Transfusion (IUT)** using fresh, O-negative, irradiated, packed red cells. Deliver between weeks 32-35 if complications arise.</li>
+                    `;
+                }
+            } 
+            else if (hemeIncompat === 'abo-incompat') {
+                riskDisplay.innerText = "Mild Neonatal Presentation";
+                interpretation.innerText = "Classic ABO mismatch. Typically features maternal blood group O with a newborn typed as A or B. This scenario safely carries a minimal prenatal anemia risk profile.";
+                
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = "👶 <strong>First Pregnancy Context:</strong> Can manifest during the **first pregnancy** without prior sensitization because anti-A and anti-B isohemagglutinins exist naturally in maternal circulation.";
+
+                criteria.innerHTML = `
+                    <li><strong>Postnatal Neonatal Markers:</strong> Positive Direct Antiglobulin Test (DAT / Direct Coombs) on umbilical cord blood sample, elevated unconjugated serum bilirubin, and reticulocytosis.</li>
+                `;
+                mechanism.innerHTML = `
+                    <li><strong>Pathophysiology:</strong> Group O mothers produce naturally occurring **IgG-class** anti-A and anti-B antibodies that cross the placenta. However, mild clinical presentation results from the low density of A and B antigens on fetal RBC membranes and their absorption by extra-cardiac fetal tissues.</li>
+                    <li><strong>Prevention:</strong> No prenatal prophylactic therapies (like RhoGAM) exist or are necessary.</li>
+                `;
+                surveillance.innerHTML = `
+                    <li><strong>Prenatal Monitoring:</strong> No specialized serial ultrasound scans or Doppler studies required. Managed as a routine low-risk pregnancy.</li>
+                    <li><strong>Postnatal Treatment Protocol:</strong> Early clinical checks for neonatal jaundice. Manage hyperbilirubinemia with **aggressive phototherapy** and supplemental hydration to prevent kernicterus. IVIG may be used in rare, refractory cases.</li>
+                `;
+            }
+        }
+    }
+
+    function switchTab(evt, tabName) {
+        const container = evt.currentTarget.parentElement.parentElement;
+        const contents = container.getElementsByClassName("tab-content");
+        for (let i = 0; i < contents.length; i++) {
+            contents[i].classList.remove("active");
+        }
+        const buttons = container.getElementsByClassName("tab-btn");
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
