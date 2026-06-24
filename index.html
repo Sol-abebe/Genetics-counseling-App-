@@ -329,6 +329,10 @@
             #tableChd td:nth-of-type(4):before { content: "Mother:"; }
             #tableChd td:nth-of-type(5):before { content: "Action Plan:"; }
 
+            #tableAnomalies td:nth-of-type(1):before { content: "Category:"; }
+            #tableAnomalies td:nth-of-type(2):before { content: "Examples:"; }
+            #tableAnomalies td:nth-of-type(3):before { content: "Immediate Priority:"; }
+
             #tableHeme td:nth-of-type(1):before { content: "Condition:"; }
             #tableHeme td:nth-of-type(2):before { content: "Window:"; }
             #tableHeme td:nth-of-type(3):before { content: "Anemia Risk:"; }
@@ -342,7 +346,7 @@
 <div class="container">
     <header>
         <h1>Universal Genetics & Maternal-Fetal Hematology Modeler</h1>
-        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization<br><strong> By Dr Solomon MD, MPH/RH</strong>June 2026</p>
+        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization</p>
     </header>
 
     <div class="grid-layout">
@@ -400,7 +404,7 @@
                         <select id="chdType">
                             <option value="vsd">Ventricular Septal Defect (VSD)</option>
                             <option value="asd">Atrial Septal Defect (ASD)</option>
-                            <option value="pda">Patent Ductus Arteriosus (PDA)</option>
+                            <option value="pda">Patent Ductus Paradoxus / PDA</option>
                             <option value="tof">Tetralogy of Fallot (TOF)</option>
                             <option value="hlhs">Hypoplastic Left Heart Syndrome (HLHS)</option>
                         </select>
@@ -418,8 +422,11 @@
                     <div class="form-group">
                         <label for="otherType">Isolated Structural Defect</label>
                         <select id="otherType">
-                            <option value="cleft-lip">Isolated Cleft Lip ± Cleft Palate</option>
                             <option value="ntd">Neural Tube Defect (Spina Bifida / Anencephaly)</option>
+                            <option value="chd">Congenital Heart Defects (TOF, VSD, TGA)</option>
+                            <option value="wall-defect">Abdominal Wall Defects (Gastroschisis / Omphalocele)</option>
+                            <option value="cleft-lip">Orofacial Clefts (Cleft Lip / Palate)</option>
+                            <option value="musculoskeletal">Clubfoot (TEV) / Hip Dysplasia (DDH)</option>
                             <option value="pyloric-female">Congenital Pyloric Stenosis (Female Index Case)</option>
                         </select>
                     </div>
@@ -470,15 +477,12 @@
                     <ul class="bullet-list" id="surveillanceList">
                         <li><strong>First-Trimester Screening (10-14 Weeks):</strong> Serum PAPP-A, free β-hCG, and nuchal translucency ultrasound markers.</li>
                         <li><strong>Cell-Free DNA (cfDNA/NIPT):</strong> High sensitivity tracking (>99% for T21) accessible from gestation week 10 onwards.</li>
-                      
                     </ul>
                 </div>
 
                 <div id="criteriaTab" class="tab-content">
                     <ul class="bullet-list" id="criteriaList">
                         <li><strong>Ultrasound Soft Indicators:</strong> Increased nuchal fold thickness, absent nasal bone, or complex endocardial cushion defects.</li>
-                       <li><strong>Postnatal Physical Signposts:</strong> Evaluation for central hypotonia, flat facial profile, upslanting palpebral fissures, and a single transverse palmar crease.</li>
-          
                     </ul>
                 </div>
 
@@ -496,6 +500,7 @@
                 <div class="tab-buttons">
                     <button class="tab-btn active" onclick="switchTab(event, 'tableDown')">Down Syndrome</button>
                     <button class="tab-btn" onclick="switchTab(event, 'tableChd')">Isolated CHDs</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'tableAnomalies')">Other Anomalies</button>
                     <button class="tab-btn" onclick="switchTab(event, 'tableHeme')">Immunohematology</button>
                 </div>
 
@@ -554,6 +559,45 @@
                                 <td>4.0% - 6.0%</td>
                                 <td>12.0% - 15.0%</td>
                                 <td>High heritability; execute targeted cross echo scans.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="tableAnomalies" class="tab-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Anatomical Defect Category</th>
+                                <th>Specific Entity Examples</th>
+                                <th>Immediate Emergency Relevance / Initial Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Neural Tube Defects (NTDs)</strong></td>
+                                <td>Anencephaly, Spina Bifida Aperta, Encephalocele</td>
+                                <td>Immediate neurosurgical evaluation; protect exposed neural placode from structural desiccation or bacterial containment.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Congenital Heart Defects (CHD)</strong></td>
+                                <td>Tetralogy of Fallot (TOF), Transposition of Great Arteries (TGA), Severe VSD</td>
+                                <td>Emergent neonatal echocardiography; track ductal dependency profiles; guarantee prostaglandin infusion lines.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Abdominal Wall Defects</strong></td>
+                                <td>Omphalocele, Gastroschisis</td>
+                                <td>Apply sterile saline-soaked non-adherent dressings or surgical silo containers; initiate aggressive fluid management.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Orofacial Clefts</strong></td>
+                                <td>Cleft Lip, Isolated Cleft Palate</td>
+                                <td>Assess neonatal safe feeding mechanics; apply custom cleft nipples/Haberman feeders to eliminate risk of aspiration.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Musculoskeletal & Limb</strong></td>
+                                <td>Talipes Equinovarus (Clubfoot), Developmental Dysplasia of the Hip (DDH)</td>
+                                <td>Early pediatric orthopedic referral tracks; arrange prompt serial manipulation casting via the Ponseti method guidelines.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -675,13 +719,56 @@
         }
 
         else if (category === 'other-congenital') {
+            const kinship = document.getElementById('otherKinship').value;
             const otherType = document.getElementById('otherType').value;
+
+            // Define Global Dynamic Structural Protocol Layer to completely insulate from Down Syndrome objects
             if (otherType === 'ntd') {
-                riskDisplay.innerText = "2.0% - 3.0%"; interpretation.innerText = "Isolated Neural Tube Defect tracking ranges.";
-                alertBox.style.display = 'block'; alertBox.innerHTML = "💊 Prescribe high-dose **Folic Acid (4.0 mg/day)** 1-3 months before subsequent conception.";
-            } else if (otherType === 'pyloric-female') {
-                riskDisplay.innerText = "8.0%"; interpretation.innerText = "Carter Effect active: Female index proband indicates higher polygenic loading scores inside the family line.";
-            } else { riskDisplay.innerText = "2.0% - 4.0%"; interpretation.innerText = "Standard multifactorial birth defect risk baselines."; }
+                riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "10.0%";
+                interpretation.innerText = "Isolated Neural Tube Defect tracking ranges following standard multifactorial inheritance models.";
+                alertBox.style.display = 'block'; 
+                alertBox.innerHTML = "💊 <strong>Prophylaxis Directives:</strong> Prescribe high-dose **Folic Acid (4.0 mg/day)** 1-3 months before subsequent conception.";
+                criteria.innerHTML = "<li><strong>Prenatal Markers:</strong> Elevated maternal serum alpha-fetoprotein (MSAFP), banana/lemon signs on cranial ultrasound.</li><li><strong>Postnatal Presentation:</strong> Clear spinal placode lesion exposure, hydrocephalus signs.</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Failure of neural tube closure by day 28 post-conception due to gene-environment links.</li>";
+                surveillance.innerHTML = "<li><strong>Immediate Protocol:</strong> Protect lesion with sterile, saline-soaked non-adherent wraps. Organize urgent neurosurgical response within 24-48 hours.</li>";
+            } 
+            else if (otherType === 'chd') {
+                riskDisplay.innerText = (kinship === 'one-child') ? "3.0% - 4.0%" : "10.0% - 12.0%";
+                interpretation.innerText = "Structural Congenital Heart Defects. Risk bounds fluctuate based on genetic complexity.";
+                criteria.innerHTML = "<li><strong>Screening:</strong> Detailed structural morphology sweeps, abnormal four-chamber or outflow views.</li>";
+                mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Aberrant embryonic cardiogenesis causing structural routing failure.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Establish immediate post-delivery pulse oximetry, secure echocardiogram mapping, and ready prostaglandin lines.</li>";
+            }
+            else if (otherType === 'wall-defect') {
+                riskDisplay.innerText = "< 1.0%";
+                interpretation.innerText = "Gastroschisis / Omphalocele structural phenotypes. Highly sporadic recurrences unless tied to major syndromes.";
+                warnBox.style.display = 'block';
+                warnBox.innerHTML = "🔍 <strong>Differential Check:</strong> Gastroschisis is usually isolated, but Omphalocele carries strong syndromic risks (e.g., Beckwith-Wiedemann).";
+                criteria.innerHTML = "<li><strong>Antenatal Clues:</strong> Free-floating bowel loops (Gastroschisis) or midline covered mass at umbilical insertion (Omphalocele).</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Defective paraumbilical body wall closure or failure of midgut physiological rotation returns.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Cover bowel with sterile bowel bags/silo wrappers. Ensure aggressive fluid replacement and protect thermal homeostasis.</li>";
+            }
+            else if (otherType === 'cleft-lip') {
+                riskDisplay.innerText = (kinship === 'one-child') ? "4.0%" : "9.0%";
+                interpretation.innerText = "Orofacial cleft recurrence patterns showing standard polygenic heritability models.";
+                criteria.innerHTML = "<li><strong>Diagnostics:</strong> Discontinuity of the upper lip or alveolar ridge on prenatal profiling or postnatal inspection.</li>";
+                mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Failure of fusion between maxillary and medial nasal prominent segments.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Prioritize structural feeding metrics. Deploy customized orthodontic cleft nipples/feeders to clear aspiration threats.</li>";
+            }
+            else if (otherType === 'musculoskeletal') {
+                riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "8.0%";
+                interpretation.innerText = "Isolated structural musculoskeletal anomalies (TEV / DDH) demonstrating clean multifactorial bounds.";
+                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Fixed hindfoot equinus deformity (Clubfoot) or positive Barlow/Ortolani diagnostic maneuvers (DDH).</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Rigid intrauterine crowding risks compounded by ligamentous hyperlaxity parameters.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Arrange pediatric orthopedic follow-up lines. Initiate early casting sequences (Ponseti framework) or Pavlik harness fitting.</li>";
+            }
+            else if (otherType === 'pyloric-female') {
+                riskDisplay.innerText = "8.0%"; 
+                interpretation.innerText = "Carter Effect active: Female index proband indicates higher polygenic loading scores inside the family line.";
+                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Non-bilious projectile vomiting, palpable 'olive-like' mass, metabolic alkalosis.</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Hypertrophy of the pyloric sphincter muscle creating a functional outlet obstruction.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Correct fluids and electrolytes (hypokalemic hypochloremic metabolic alkalosis) before planning surgical pyloromyotomy.</li>";
+            }
         }
 
         else if (category === 'maternal-hematology') {
