@@ -85,6 +85,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 16px;
+            min-width: 0; /* Prevents flex/grid overflowing text fields */
         }
 
         .card h2 {
@@ -153,21 +154,27 @@
         }
 
         .risk-display {
-            font-size: 1.9rem;
+            font-size: 1.7rem; /* Adaptive on micro-screens */
             font-weight: 800;
             color: var(--primary-color);
             margin: 6px 0;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .alert-box, .warn-box {
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .alert-box {
             background-color: var(--accent-bg-alert);
             border: 1px solid #fca5a5;
             border-left: 4px solid var(--accent-alert);
-            padding: 12px;
-            border-radius: 4px;
-            margin-top: 12px;
-            font-size: 0.88rem;
             color: #7f1d1d;
         }
 
@@ -175,10 +182,6 @@
             background-color: var(--accent-bg-warn);
             border: 1px solid #fde68a;
             border-left: 4px solid var(--accent-warn);
-            padding: 12px;
-            border-radius: 4px;
-            margin-top: 12px;
-            font-size: 0.88rem;
             color: #78350f;
         }
 
@@ -191,6 +194,11 @@
             margin-bottom: 12px; 
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Modern browser clean view */
+        }
+
+        .tab-buttons::-webkit-scrollbar {
+            display: none; /* Webkit clean view */
         }
         
         .tab-btn { 
@@ -202,6 +210,7 @@
             color: var(--text-light); 
             white-space: nowrap; 
             border-bottom: 2px solid transparent; 
+            flex-shrink: 0;
         }
         
         .tab-btn.active { 
@@ -214,9 +223,9 @@
         .tab-content.active { display: block; }
         
         ul.bullet-list { margin-left: 16px; margin-top: 6px; }
-        ul.bullet-list li { margin-bottom: 8px; font-size: 0.88rem; color: var(--text-light); }
+        ul.bullet-list li { margin-bottom: 8px; font-size: 0.88rem; color: var(--text-light); word-wrap: break-word; }
 
-        /* TABLE TRANSFORMATION RULES FOR MOBILE RESPONSIVENESS */
+        /* TABLE STRATEGIES FOR RESPONSIVENESS */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -262,7 +271,7 @@
             .risk-display { font-size: 2.4rem; }
         }
 
-        /* MOBILE SPECIFIC BREAKDOWN: TABLES TO UNIFORM DATA CARDS */
+        /* MOBILE OVERRIDES: CONVERTING TABLES INTO CARD LAYOUTS */
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr { 
                 display: block; 
@@ -276,7 +285,7 @@
                 border: 1px solid var(--border-color); 
                 border-radius: 8px;
                 margin-bottom: 12px;
-                padding: 8px;
+                padding: 12px 8px;
                 background-color: #fafafa;
             }
             td { 
@@ -286,13 +295,18 @@
                 padding-left: 45%; 
                 text-align: right;
                 font-size: 0.88rem;
+                min-height: 38px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
             }
             td:last-child {
                 border-bottom: none;
             }
             td:before { 
                 position: absolute;
-                top: 10px;
+                top: 50%;
+                transform: translateY(-50%);
                 left: 8px;
                 width: 40%; 
                 padding-right: 10px; 
@@ -302,7 +316,7 @@
                 color: var(--primary-color);
             }
             
-            /* DYNAMIC MAP RE-LABELS */
+            /* MAP ALIGNMENTS */
             #tableDown td:nth-of-type(1):before { content: "Variant:"; }
             #tableDown td:nth-of-type(2):before { content: "Age 20-30:"; }
             #tableDown td:nth-of-type(3):before { content: "Age 35:"; }
@@ -328,7 +342,7 @@
 <div class="container">
     <header>
         <h1>Universal Genetics & Maternal-Fetal Hematology Modeler</h1>
-        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization<br><strong>By Dr Solomon MD, MPH/RH</strong>June 2026</p>
+        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization<br><strong> By Dr Solomon MD, MPH/RH</strong>June 2026</p>
     </header>
 
     <div class="grid-layout">
@@ -456,12 +470,15 @@
                     <ul class="bullet-list" id="surveillanceList">
                         <li><strong>First-Trimester Screening (10-14 Weeks):</strong> Serum PAPP-A, free β-hCG, and nuchal translucency ultrasound markers.</li>
                         <li><strong>Cell-Free DNA (cfDNA/NIPT):</strong> High sensitivity tracking (>99% for T21) accessible from gestation week 10 onwards.</li>
+                      
                     </ul>
                 </div>
 
                 <div id="criteriaTab" class="tab-content">
                     <ul class="bullet-list" id="criteriaList">
                         <li><strong>Ultrasound Soft Indicators:</strong> Increased nuchal fold thickness, absent nasal bone, or complex endocardial cushion defects.</li>
+                       <li><strong>Postnatal Physical Signposts:</strong> Evaluation for central hypotonia, flat facial profile, upslanting palpebral fissures, and a single transverse palmar crease.</li>
+          
                     </ul>
                 </div>
 
