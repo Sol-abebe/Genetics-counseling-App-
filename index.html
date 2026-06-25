@@ -85,7 +85,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 16px;
-            min-width: 0; /* Prevents flex/grid overflowing text fields */
+            min-width: 0;
         }
 
         .card h2 {
@@ -154,7 +154,7 @@
         }
 
         .risk-display {
-            font-size: 1.7rem; /* Adaptive on micro-screens */
+            font-size: 1.7rem;
             font-weight: 800;
             color: var(--primary-color);
             margin: 6px 0;
@@ -194,11 +194,11 @@
             margin-bottom: 12px; 
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Modern browser clean view */
+            scrollbar-width: none;
         }
 
         .tab-buttons::-webkit-scrollbar {
-            display: none; /* Webkit clean view */
+            display: none;
         }
         
         .tab-btn { 
@@ -225,7 +225,6 @@
         ul.bullet-list { margin-left: 16px; margin-top: 6px; }
         ul.bullet-list li { margin-bottom: 8px; font-size: 0.88rem; color: var(--text-light); word-wrap: break-word; }
 
-        /* TABLE STRATEGIES FOR RESPONSIVENESS */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -246,18 +245,6 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .badge {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .badge-chrom { background-color: #fef8e6; color: #9a3412; border: 1px solid #fed7aa; }
-        .badge-heme { background-color: #f5f3ff; color: #5b21b6; border: 1px solid #ddd6fe; }
-
-        /* DESKTOP MEDIA ADAPTATIONS */
         @media (min-width: 900px) {
             body { padding: 20px; }
             header { padding: 24px; }
@@ -271,7 +258,6 @@
             .risk-display { font-size: 2.4rem; }
         }
 
-        /* MOBILE OVERRIDES: CONVERTING TABLES INTO CARD LAYOUTS */
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr { 
                 display: block; 
@@ -300,9 +286,7 @@
                 align-items: center;
                 justify-content: flex-end;
             }
-            td:last-child {
-                border-bottom: none;
-            }
+            td:last-child { border-bottom: none; }
             td:before { 
                 position: absolute;
                 top: 50%;
@@ -316,26 +300,25 @@
                 color: var(--primary-color);
             }
             
-            /* MAP ALIGNMENTS */
             #tableDown td:nth-of-type(1):before { content: "Variant:"; }
-            #tableDown td:nth-of-type(2):before { content: "Age 20-30:"; }
+            #tableDown td:nth-of-type(2):before { content: "Background (Age 20):"; }
             #tableDown td:nth-of-type(3):before { content: "Age 35:"; }
-            #tableDown td:nth-of-type(4):before { content: "Age 40-45:"; }
-            #tableDown td:nth-of-type(5):before { content: "Paradigm:"; }
+            #tableDown td:nth-of-type(4):before { content: "Age 45:"; }
+            #tableDown td:nth-of-type(5):before { content: "Recurrence Rate:"; }
 
             #tableChd td:nth-of-type(1):before { content: "Lesion:"; }
-            #tableChd td:nth-of-type(2):before { content: "Baseline:"; }
-            #tableChd td:nth-of-type(3):before { content: "1 Sibling:"; }
-            #tableChd td:nth-of-type(4):before { content: "Mother:"; }
-            #tableChd td:nth-of-type(5):before { content: "Action Plan:"; }
+            #tableChd td:nth-of-type(2):before { content: "Gen Pop Risk:"; }
+            #tableChd td:nth-of-type(3):before { content: "1 Sibling Affected:"; }
+            #tableChd td:nth-of-type(4):before { content: "Mother Affected:"; }
 
             #tableAnomalies td:nth-of-type(1):before { content: "Category:"; }
-            #tableAnomalies td:nth-of-type(2):before { content: "Examples:"; }
-            #tableAnomalies td:nth-of-type(3):before { content: "Immediate Priority:"; }
+            #tableAnomalies td:nth-of-type(2):before { content: "Gen Pop Baseline:"; }
+            #tableAnomalies td:nth-of-type(3):before { content: "Recurrence (1 Child):"; }
+            #tableAnomalies td:nth-of-type(4):before { content: "Immediate Priority:"; }
 
             #tableHeme td:nth-of-type(1):before { content: "Condition:"; }
             #tableHeme td:nth-of-type(2):before { content: "Window:"; }
-            #tableHeme td:nth-of-type(3):before { content: "Anemia Risk:"; }
+            #tableHeme td:nth-of-type(3):before { content: "Gen Pop Risk:"; }
             #tableHeme td:nth-of-type(4):before { content: "Prophylaxis:"; }
             #tableHeme td:nth-of-type(5):before { content: "Treatment:"; }
         }
@@ -346,7 +329,7 @@
 <div class="container">
     <header>
         <h1>Universal Genetics & Maternal-Fetal Hematology Modeler</h1>
-        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization<br><strong>By Dr Solomon MD, MPH/RH</strong>June 2026</p>
+        <p>Responsive Point-of-Care Support System for Cytogenetics, Structural CHDs, and Red Cell Alloimmunization<br><strong>By Dr Solomon MD, MPH/RH June 2026</strong></p>
     </header>
 
     <div class="grid-layout">
@@ -366,10 +349,11 @@
 
                 <div id="downPanel">
                     <div class="form-group">
-                        <label for="downType">Cytogenetic Subtype</label>
+                        <label for="downType">Cytogenetic Subtype / Kinship History</label>
                         <select id="downType" onchange="handleCategorySwitch()">
-                            <option value="nondisjunction">Free Trisomy 21 (Meiotic Non-disjunction)</option>
-                            <option value="mosaic">Mosaic Down Syndrome (Post-zygotic Error)</option>
+                            <option value="nondisjunction-none">Free T21: No Precedent Family History (General Baseline)</option>
+                            <option value="nondisjunction">Free T21: 1 Prior Affected Child</option>
+                            <option value="mosaic">Mosaic Down Syndrome (Sporadic Mitigation Profile)</option>
                             <option value="translocation-denovo">Robertsonian Translocation (De Novo Variant)</option>
                             <option value="translocation-mat">Robertsonian Translocation (Maternal Carrier Parent)</option>
                             <option value="translocation-pat">Robertsonian Translocation (Paternal Carrier Parent)</option>
@@ -393,6 +377,7 @@
                     <div class="form-group">
                         <label for="chdKinship">Kinship Proband Vector</label>
                         <select id="chdKinship">
+                            <option value="none">No Precedent History (General Population Baseline)</option>
                             <option value="one-sibling">1 Prior Sibling Affected (Parents Normal)</option>
                             <option value="two-siblings">2 Prior Siblings Affected (Parents Normal)</option>
                             <option value="affected-father">Affected Father</option>
@@ -404,7 +389,7 @@
                         <select id="chdType">
                             <option value="vsd">Ventricular Septal Defect (VSD)</option>
                             <option value="asd">Atrial Septal Defect (ASD)</option>
-                            <option value="pda">Patent Ductus Paradoxus / PDA</option>
+                            <option value="pda">Patent Ductus Arteriosus (PDA)</option>
                             <option value="tof">Tetralogy of Fallot (TOF)</option>
                             <option value="hlhs">Hypoplastic Left Heart Syndrome (HLHS)</option>
                         </select>
@@ -415,6 +400,7 @@
                     <div class="form-group">
                         <label for="otherKinship">Pedigree Status</label>
                         <select id="otherKinship">
+                            <option value="none">No Precedent History (General Population Baseline)</option>
                             <option value="one-child">1 Prior Child Affected</option>
                             <option value="two-children">2 Prior Children Affected</option>
                         </select>
@@ -455,9 +441,9 @@
 
             <div class="results-box">
                 <p>Calculated Evaluation Summary:</p>
-                <div class="risk-display" id="riskValue">0.7% - 1.0%</div>
+                <div class="risk-display" id="riskValue">0.07% (1 in 1500)</div>
                 <p id="riskInterpretation" style="font-size: 0.9rem; color: var(--text-light);">
-                    Recurrence parameters for free Trisomy 21 are bounded by a 1% threshold or age risk limits.
+                    Background age-dependent baseline risk for free Trisomy 21 with no prior family history.
                 </p>
                 <div id="alertBox" class="alert-box" style="display: none;"></div>
                 <div id="warnBox" class="warn-box" style="display: none;"></div>
@@ -508,27 +494,27 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Variant</th>
-                                <th>Age 20-30</th>
-                                <th>Age 35</th>
-                                <th>Age 40-45</th>
-                                <th>Paradigm</th>
+                                <th>Variant / Context</th>
+                                <th>Gen Pop (Age 20)</th>
+                                <th>Gen Pop (Age 35)</th>
+                                <th>Gen Pop (Age 45)</th>
+                                <th>Recurrence Rate (Post-Index Case)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><strong>Free Trisomy 21</strong></td>
-                                <td>0.7% - 1.0%</td>
-                                <td>~1.0%</td>
-                                <td>1.0% - 3.3%</td>
-                                <td>Meiotic non-disjunction structural failures.</td>
+                                <td>~0.07% (1:1500)</td>
+                                <td>~0.27% (1:370)</td>
+                                <td>~3.33% (1:30)</td>
+                                <td>~1.0% or maternal age baseline baseline (whichever is greater)</td>
                             </tr>
                             <tr>
-                                <td><strong>Maternal t(14;21)</strong></td>
-                                <td>10% - 15%</td>
-                                <td>10% - 15%</td>
-                                <td>10% - 15%</td>
-                                <td>High-risk translocation carrier patterns.</td>
+                                <td><strong>Balanced Translocation Carrier</strong></td>
+                                <td>Extremely Rare</td>
+                                <td>Age Independent</td>
+                                <td>Age Independent</td>
+                                <td>10% - 15% (Maternal) | 1% - 2% (Paternal)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -539,26 +525,29 @@
                         <thead>
                             <tr>
                                 <th>Lesion</th>
-                                <th>Baseline</th>
-                                <th>1 Sibling</th>
-                                <th>Mother</th>
-                                <th>Action Plan</th>
+                                <th>Gen Pop Background Risk</th>
+                                <th>1 Sibling Affected</th>
+                                <th>Mother Affected</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><strong>VSD</strong></td>
-                                <td>0.3%</td>
+                                <td>~0.30% (3 per 1000)</td>
                                 <td>3.0%</td>
                                 <td>6.0% - 10.0%</td>
-                                <td>Fetal morphology layout check at 18-22 weeks.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ASD / PDA</strong></td>
+                                <td>~0.10% (1 per 1000)</td>
+                                <td>2.5%</td>
+                                <td>4.0% - 6.0%</td>
                             </tr>
                             <tr>
                                 <td><strong>HLHS</strong></td>
-                                <td>0.02%</td>
+                                <td>~0.02% (0.2 per 1000)</td>
                                 <td>4.0% - 6.0%</td>
                                 <td>12.0% - 15.0%</td>
-                                <td>High heritability; execute targeted cross echo scans.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -569,35 +558,35 @@
                         <thead>
                             <tr>
                                 <th>Anatomical Defect Category</th>
-                                <th>Specific Entity Examples</th>
+                                <th>Gen Pop Background Baseline</th>
+                                <th>Recurrence Risk (1 Prior Child Affected)</th>
                                 <th>Immediate Emergency Relevance / Initial Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><strong>Neural Tube Defects (NTDs)</strong></td>
-                                <td>Anencephaly, Spina Bifida Aperta, Encephalocele</td>
-                                <td>Immediate neurosurgical evaluation; protect exposed neural placode from structural desiccation or bacterial containment.</td>
+                                <td>~0.10% (1 per 1000)</td>
+                                <td>2.0% - 3.0%</td>
+                                <td>Immediate neurosurgical evaluation; protect exposed neural placode with sterile moist non-adherent wraps.</td>
                             </tr>
                             <tr>
-                                <td><strong>Congenital Heart Defects (CHD)</strong></td>
-                                <td>Tetralogy of Fallot (TOF), Transposition of Great Arteries (TGA), Severe VSD</td>
-                                <td>Emergent neonatal echocardiography; track ductal dependency profiles; guarantee prostaglandin infusion lines.</td>
+                                <td><strong>Orofacial Clefts (CL±P)</strong></td>
+                                <td>~0.10% (1 per 1000)</td>
+                                <td>4.0%</td>
+                                <td>Assess feeding mechanics; employ specialized cleft nipples/Haberman tools to neutralize aspiration risk.</td>
                             </tr>
                             <tr>
                                 <td><strong>Abdominal Wall Defects</strong></td>
-                                <td>Omphalocele, Gastroschisis</td>
-                                <td>Apply sterile saline-soaked non-adherent dressings or surgical silo containers; initiate aggressive fluid management.</td>
+                                <td>~0.05% (0.5 per 1000)</td>
+                                <td>&lt; 1.0% (Highly Sporadic)</td>
+                                <td>Apply sterile saline dressings or sterile silo coverings; initiate immediate fluid resuscitation management.</td>
                             </tr>
                             <tr>
-                                <td><strong>Orofacial Clefts</strong></td>
-                                <td>Cleft Lip, Isolated Cleft Palate</td>
-                                <td>Assess neonatal safe feeding mechanics; apply custom cleft nipples/Haberman feeders to eliminate risk of aspiration.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Musculoskeletal & Limb</strong></td>
-                                <td>Talipes Equinovarus (Clubfoot), Developmental Dysplasia of the Hip (DDH)</td>
-                                <td>Early pediatric orthopedic referral tracks; arrange prompt serial manipulation casting via the Ponseti method guidelines.</td>
+                                <td><strong>Clubfoot (TEV) / DDH</strong></td>
+                                <td>~0.15% (1.5 per 1000)</td>
+                                <td>2.0% - 3.0%</td>
+                                <td>Early pediatric orthopedic referral tracks; arrange prompt serial structural casting (Ponseti method).</td>
                             </tr>
                         </tbody>
                     </table>
@@ -609,7 +598,7 @@
                             <tr>
                                 <th>Condition</th>
                                 <th>Window</th>
-                                <th>Anemia Risk</th>
+                                <th>Gen Pop Risk Profile</th>
                                 <th>Prophylaxis</th>
                                 <th>Treatment</th>
                             </tr>
@@ -618,14 +607,14 @@
                             <tr>
                                 <td><strong>Rh Iso-Imm.</strong></td>
                                 <td>Subsequent pregnancies</td>
-                                <td>Severe / Fetal Hydrops</td>
+                                <td>~15% of Rh- mothers without RhoGAM</td>
                                 <td>RhoGAM at 28w & Postpartum</td>
                                 <td>Exchange Transfusion / IUT</td>
                             </tr>
                             <tr>
                                 <td><strong>ABO Incompat.</strong></td>
                                 <td>Can affect 1st pregnancy</td>
-                                <td>Mild / Minimal</td>
+                                <td>~15% - 20% of all pregnancies (O vs A/B)</td>
                                 <td>None Indicated prenatally</td>
                                 <td>Postnatal Phototherapy</td>
                             </tr>
@@ -648,7 +637,7 @@
 
         if (category === 'down-syndrome') {
             const downType = document.getElementById('downType').value;
-            document.getElementById('ageGroup').style.display = (downType === 'nondisjunction' || downType === 'mosaic') ? 'block' : 'none';
+            document.getElementById('ageGroup').style.display = (downType === 'nondisjunction' || downType === 'nondisjunction-none' || downType === 'mosaic') ? 'block' : 'none';
         }
     }
 
@@ -680,15 +669,24 @@
                 <li><strong>Postnatal Evaluation:</strong> Examine for systemic hypotonia, upslanting eyes, and single palmar crease markers.</li>
             `;
 
-            if (downType === 'nondisjunction') {
-                mechanism.innerHTML = "<li><strong>Etiology:</strong> Numeric aneuploidy (+21) trace to maternal meiosis I spindle breakdowns.</li>";
-                surveillance.innerHTML = `
-                    <li><strong>Cell-Free DNA (cfDNA / NIPT):</strong> Indicated from 10 weeks gestation (>99% sensitivity metrics).</li>
-                `;
-                if (age === 'age-20' || age === 'age-25') { riskDisplay.innerText = "0.7% - 1.0%"; interpretation.innerText = "Elevated risk profile relative to baseline; age excess tracks heavily in younger populations."; }
-                else if (age === 'age-30' || age === 'age-35') { riskDisplay.innerText = "~1.0%"; interpretation.innerText = "Empirical risk reaches a flat 1.0% limit."; }
-                else if (age === 'age-40') { riskDisplay.innerText = "1.0%"; interpretation.innerText = "Risk limits match background age factors directly."; }
-                else if (age === 'age-45') { riskDisplay.innerText = "3.3%"; interpretation.innerText = "High-risk tier completely governed by background oocyte age distributions."; }
+            if (downType === 'nondisjunction-none') {
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Sporadic meiotic non-disjunction (+21) heavily tied to background maternal age bounds. No previous family history.</li>";
+                surveillance.innerHTML = "<li><strong>Cell-Free DNA (cfDNA / NIPT):</strong> Accessible from 10 weeks gestation for general screening protocols.</li>";
+                
+                if (age === 'age-20') { riskDisplay.innerText = "0.07% (1 in 1500)"; interpretation.innerText = "Standard general population risk profile at age 20."; }
+                else if (age === 'age-25') { riskDisplay.innerText = "0.08% (1 in 1200)"; interpretation.innerText = "Standard general population risk baseline at age 25."; }
+                else if (age === 'age-30') { riskDisplay.innerText = "0.11% (1 in 900)"; interpretation.innerText = "Background general age limit factor at age 30."; }
+                else if (age === 'age-35') { riskDisplay.innerText = "0.27% (1 in 370)"; interpretation.innerText = "Advanced Maternal Age (AMA) threshold inflection baseline."; }
+                else if (age === 'age-40') { riskDisplay.innerText = "1.00% (1 in 100)"; interpretation.innerText = "Significant background oocyte age risk amplification."; }
+                else if (age === 'age-45') { riskDisplay.innerText = "3.33% (1 in 30)"; interpretation.innerText = "High general population background ceiling due to spindle degradation dynamics."; }
+            }
+            else if (downType === 'nondisjunction') {
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Recurrence tracking after an explicit previous free Trisomy 21 presentation.</li>";
+                surveillance.innerHTML = "<li><strong>NIPT / Invasive Testing:</strong> Targeted fetal verification recommended at week 10-12 onwards.</li>";
+                
+                if (age === 'age-20' || age === 'age-25' || age === 'age-30' || age === 'age-35') { riskDisplay.innerText = "~1.00%"; interpretation.innerText = "Empirical risk is set at a flat 1% threshold, surpassing the background age distribution parameters."; }
+                else if (age === 'age-40') { riskDisplay.innerText = "1.00%"; interpretation.innerText = "Risk values align directly with the background maternal age profile."; }
+                else if (age === 'age-45') { riskDisplay.innerText = "3.33%"; interpretation.innerText = "Recurrence potential is entirely governed by advanced age baseline constants."; }
             } 
             else if (downType === 'translocation-mat') {
                 riskDisplay.innerText = "10.0% - 15.0%"; interpretation.innerText = "High recurrence tracking caused by balanced translocation mechanics in maternal chromosomes.";
@@ -708,66 +706,72 @@
             mechanism.innerHTML = "<li><strong>Model:</strong> Non-syndromic structural defects follow multifactorial polygenic tracking parameters.</li>";
             surveillance.innerHTML = "<li><strong>Action Line:</strong> Request formal fetal echo profiling between structural gestational weeks 18-22.</li>";
 
-            if (chdType === 'vsd') {
-                riskDisplay.innerText = (kinship === 'one-sibling') ? "3.0%" : (kinship === 'two-siblings') ? "10.0%" : "6.0% - 10.0%";
-                interpretation.innerText = "Isolated VSD tracking vectors; presents strong concordance behaviors across related probands.";
-            } else if (chdType === 'hlhs') {
-                riskDisplay.innerText = (kinship === 'one-sibling') ? "4.0% - 6.0%" : "12.0% - 15.0%";
-                interpretation.innerText = "Left heart structural defects express elevated heritability metrics.";
-                warnBox.style.display = 'block'; warnBox.innerHTML = "🔍 Screen parents via echocardiography to exclude silent **Bicuspid Aortic Valves (BAV)**.";
-            } else { riskDisplay.innerText = "1.5% - 3.0%"; interpretation.innerText = "Standard empirical ranges for isolated cardiovascular variations."; }
+            if (kinship === 'none') {
+                if (chdType === 'vsd') { riskDisplay.innerText = "0.30% (3 in 1000)"; interpretation.innerText = "Standard non-syndromic general population baseline for isolated VSD anomalies."; }
+                else if (chdType === 'hlhs') { riskDisplay.innerText = "0.02% (1 in 5000)"; interpretation.innerText = "General population background baseline for severe left-heart obstructive defects."; }
+                else { riskDisplay.innerText = "0.10% (1 in 1000)"; interpretation.innerText = "Standard non-targeted population base rate profile."; }
+            } else {
+                if (chdType === 'vsd') {
+                    riskDisplay.innerText = (kinship === 'one-sibling') ? "3.0%" : (kinship === 'two-siblings') ? "10.0%" : "6.0% - 10.0%";
+                    interpretation.innerText = "Isolated VSD tracking vectors; presents strong concordance behaviors across related probands.";
+                } else if (chdType === 'hlhs') {
+                    riskDisplay.innerText = (kinship === 'one-sibling') ? "4.0% - 6.0%" : "12.0% - 15.0%";
+                    interpretation.innerText = "Left heart structural defects express elevated heritability metrics.";
+                    warnBox.style.display = 'block'; warnBox.innerHTML = "🔍 Screen parents via echocardiography to exclude silent **Bicuspid Aortic Valves (BAV)**.";
+                } else { riskDisplay.innerText = "1.5% - 3.0%"; interpretation.innerText = "Standard empirical ranges for isolated cardiovascular variations."; }
+            }
         }
 
         else if (category === 'other-congenital') {
             const kinship = document.getElementById('otherKinship').value;
             const otherType = document.getElementById('otherType').value;
 
-            // Define Global Dynamic Structural Protocol Layer to completely insulate from Down Syndrome objects
             if (otherType === 'ntd') {
-                riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "10.0%";
-                interpretation.innerText = "Isolated Neural Tube Defect tracking ranges following standard multifactorial inheritance models.";
-                alertBox.style.display = 'block'; 
-                alertBox.innerHTML = "💊 <strong>Prophylaxis Directives:</strong> Prescribe high-dose **Folic Acid (4.0 mg/day)** 1-3 months before subsequent conception.";
-                criteria.innerHTML = "<li><strong>Prenatal Markers:</strong> Elevated maternal serum alpha-fetoprotein (MSAFP), banana/lemon signs on cranial ultrasound.</li><li><strong>Postnatal Presentation:</strong> Clear spinal placode lesion exposure, hydrocephalus signs.</li>";
+                if (kinship === 'none') {
+                    riskDisplay.innerText = "0.10% (1 in 1000)"; interpretation.innerText = "General population incidence rate baseline for open and closed neural tube anomalies.";
+                } else {
+                    riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "10.0%"; interpretation.innerText = "Isolated Neural Tube Defect tracking ranges following standard multifactorial inheritance models.";
+                }
+                alertBox.style.display = 'block'; alertBox.innerHTML = "💊 <strong>Prophylaxis Directives:</strong> Prescribe high-dose **Folic Acid (4.0 mg/day)** 1-3 months before subsequent conception.";
+                criteria.innerHTML = "<li><strong>Prenatal Markers:</strong> Elevated maternal serum alpha-fetoprotein (MSAFP), banana/lemon signs on cranial ultrasound.</li>";
                 mechanism.innerHTML = "<li><strong>Etiology:</strong> Failure of neural tube closure by day 28 post-conception due to gene-environment links.</li>";
-                surveillance.innerHTML = "<li><strong>Immediate Protocol:</strong> Protect lesion with sterile, saline-soaked non-adherent wraps. Organize urgent neurosurgical response within 24-48 hours.</li>";
+                surveillance.innerHTML = "<li><strong>Immediate Protocol:</strong> Protect lesion with sterile, saline-soaked wraps. Arrange surgical closure lines post-delivery.</li>";
             } 
             else if (otherType === 'chd') {
-                riskDisplay.innerText = (kinship === 'one-child') ? "3.0% - 4.0%" : "10.0% - 12.0%";
-                interpretation.innerText = "Structural Congenital Heart Defects. Risk bounds fluctuate based on genetic complexity.";
+                if (kinship === 'none') { riskDisplay.innerText = "0.60% - 0.80%"; interpretation.innerText = "Combined crude background tracking index for generic structural heart deviations at birth."; }
+                else { riskDisplay.innerText = (kinship === 'one-child') ? "3.0% - 4.0%" : "10.0% - 12.0%"; interpretation.innerText = "Structural Congenital Heart Defects risk profiles after an index case."; }
                 criteria.innerHTML = "<li><strong>Screening:</strong> Detailed structural morphology sweeps, abnormal four-chamber or outflow views.</li>";
                 mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Aberrant embryonic cardiogenesis causing structural routing failure.</li>";
-                surveillance.innerHTML = "<li><strong>Directives:</strong> Establish immediate post-delivery pulse oximetry, secure echocardiogram mapping, and ready prostaglandin lines.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Establish immediate post-delivery pulse oximetry, secure echocardiogram mapping.</li>";
             }
             else if (otherType === 'wall-defect') {
-                riskDisplay.innerText = "< 1.0%";
-                interpretation.innerText = "Gastroschisis / Omphalocele structural phenotypes. Highly sporadic recurrences unless tied to major syndromes.";
-                warnBox.style.display = 'block';
-                warnBox.innerHTML = "🔍 <strong>Differential Check:</strong> Gastroschisis is usually isolated, but Omphalocele carries strong syndromic risks (e.g., Beckwith-Wiedemann).";
-                criteria.innerHTML = "<li><strong>Antenatal Clues:</strong> Free-floating bowel loops (Gastroschisis) or midline covered mass at umbilical insertion (Omphalocele).</li>";
-                mechanism.innerHTML = "<li><strong>Etiology:</strong> Defective paraumbilical body wall closure or failure of midgut physiological rotation returns.</li>";
-                surveillance.innerHTML = "<li><strong>Directives:</strong> Cover bowel with sterile bowel bags/silo wrappers. Ensure aggressive fluid replacement and protect thermal homeostasis.</li>";
+                if (kinship === 'none') { riskDisplay.innerText = "0.05% (1 in 2000)"; interpretation.innerText = "General background baseline distribution for omphalocele and gastroschisis structures."; }
+                else { riskDisplay.innerText = "< 1.0%"; interpretation.innerText = "Gastroschisis / Omphalocele structural phenotypes. Highly sporadic recurrences unless syndromic."; }
+                warnBox.style.display = 'block'; warnBox.innerHTML = "🔍 <strong>Differential Check:</strong> Gastroschisis is usually isolated, but Omphalocele carries strong syndromic risks.";
+                criteria.innerHTML = "<li><strong>Antenatal Clues:</strong> Free-floating bowel loops or midline covered mass at umbilical insertion.</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Defective paraumbilical body wall closure lines.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Cover bowel with sterile bowel bags or wet dressings. Protect thermal status.</li>";
             }
             else if (otherType === 'cleft-lip') {
-                riskDisplay.innerText = (kinship === 'one-child') ? "4.0%" : "9.0%";
-                interpretation.innerText = "Orofacial cleft recurrence patterns showing standard polygenic heritability models.";
-                criteria.innerHTML = "<li><strong>Diagnostics:</strong> Discontinuity of the upper lip or alveolar ridge on prenatal profiling or postnatal inspection.</li>";
-                mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Failure of fusion between maxillary and medial nasal prominent segments.</li>";
-                surveillance.innerHTML = "<li><strong>Directives:</strong> Prioritize structural feeding metrics. Deploy customized orthodontic cleft nipples/feeders to clear aspiration threats.</li>";
+                if (kinship === 'none') { riskDisplay.innerText = "0.10% (1 in 1000)"; interpretation.innerText = "General population birth standard baseline incidence for non-syndromic orofacial clefting."; }
+                else { riskDisplay.innerText = (kinship === 'one-child') ? "4.0%" : "9.0%"; interpretation.innerText = "Orofacial cleft recurrence patterns showing standard polygenic heritability models."; }
+                criteria.innerHTML = "<li><strong>Diagnostics:</strong> Discontinuity of the upper lip or alveolar ridge on prenatal profiling.</li>";
+                mechanism.innerHTML = "<li><strong>Pathophysiology:</strong> Failure of fusion between embryonic facial prominences.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Deploy customized cleft nipples/feeders to eliminate risk of aspiration.</li>";
             }
             else if (otherType === 'musculoskeletal') {
-                riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "8.0%";
-                interpretation.innerText = "Isolated structural musculoskeletal anomalies (TEV / DDH) demonstrating clean multifactorial bounds.";
-                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Fixed hindfoot equinus deformity (Clubfoot) or positive Barlow/Ortolani diagnostic maneuvers (DDH).</li>";
-                mechanism.innerHTML = "<li><strong>Etiology:</strong> Rigid intrauterine crowding risks compounded by ligamentous hyperlaxity parameters.</li>";
-                surveillance.innerHTML = "<li><strong>Directives:</strong> Arrange pediatric orthopedic follow-up lines. Initiate early casting sequences (Ponseti framework) or Pavlik harness fitting.</li>";
+                if (kinship === 'none') { riskDisplay.innerText = "0.15% (1.5 in 1000)"; interpretation.innerText = "General population baseline for isolated positional or fixed clubfoot presentations."; }
+                else { riskDisplay.innerText = (kinship === 'one-child') ? "2.0% - 3.0%" : "8.0%"; interpretation.innerText = "Isolated musculoskeletal anomalies demonstrating clean multifactorial parameters."; }
+                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Fixed hindfoot equinus deformity or positive developmental hip laxity maneuvers.</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Rigid intrauterine crowding risks compounded by inherited connective variations.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Arrange pediatric orthopedic follow-up lines. Initiate early casting sequences (Ponseti framework).</li>";
             }
             else if (otherType === 'pyloric-female') {
-                riskDisplay.innerText = "8.0%"; 
-                interpretation.innerText = "Carter Effect active: Female index proband indicates higher polygenic loading scores inside the family line.";
-                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Non-bilious projectile vomiting, palpable 'olive-like' mass, metabolic alkalosis.</li>";
-                mechanism.innerHTML = "<li><strong>Etiology:</strong> Hypertrophy of the pyloric sphincter muscle creating a functional outlet obstruction.</li>";
-                surveillance.innerHTML = "<li><strong>Directives:</strong> Correct fluids and electrolytes (hypokalemic hypochloremic metabolic alkalosis) before planning surgical pyloromyotomy.</li>";
+                if (kinship === 'none') { riskDisplay.innerText = "0.30% (3 in 1000)"; interpretation.innerText = "General crude background population incidence for hypertrophic pyloric stenoses."; }
+                else { riskDisplay.innerText = "8.0%"; interpretation.innerText = "Carter Effect active: Female index proband indicates higher polygenic loading scores inside the family line."; }
+                criteria.innerHTML = "<li><strong>Clinical Criteria:</strong> Non-bilious projectile vomiting, palpable 'olive' mass, metabolic alkalosis.</li>";
+                mechanism.innerHTML = "<li><strong>Etiology:</strong> Hypertrophy of the pyloric sphincter muscle.</li>";
+                surveillance.innerHTML = "<li><strong>Directives:</strong> Stabilize hypokalemic hypochloremic metabolic shifts before planning surgical release.</li>";
             }
         }
 
